@@ -1,0 +1,12 @@
+AddType x-mapp-php5 .php
+
+Options -MultiViews
+Options +FollowSymlinks
+Options -Indexes
+
+ErrorDocument 401 https://www.topshelfrecords.com/error
+ErrorDocument 403 https://www.topshelfrecords.com/error
+ErrorDocument 404 https://www.topshelfrecords.com/roster
+ErrorDocument 500 https://www.topshelfrecords.com/error
+
+Header set Access-Control-Allow-Origin *
