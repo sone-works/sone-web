@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>tone [by sone]</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -19,18 +20,19 @@
 	  <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
+
 <body class="not_main tone">
 	<div class="contain">
 		<header class="squares sticky">
 			<a class="y square button sone" href="tone.html">
 				<h1>
 					<span class="sone_wrap">
-						<span class="rt">t</span> 
-						<span class="wt">o</span> 
+						<span class="rt">t</span>
+						<span class="wt">o</span>
 					</span>
 					<span class="sone_wrap">
-						<span class="kt">n</span> 
-						<span class="lbt">e</span> 
+						<span class="kt">n</span>
+						<span class="lbt">e</span>
 					</span>
 				</h1>
 			</a>
@@ -40,11 +42,14 @@
 			<span class="k square" aria-hidden="true" role="presentation" tabindex="-1">&nbsp;</span>
 			<span class="w square" aria-hidden="true" role="presentation" tabindex="-1">&nbsp;</span>
 			<span class="k square hide" aria-hidden="true" role="presentation" tabindex="-1">&nbsp;</span>
-			<span class="lb url_connect square sticky"><a class="y url_connect square button" href="#connect">connect</a></span>
+			<span class="lb url_connect square sticky"><a class="y url_connect square button"
+					href="#connect">connect</a></span>
 		</header>
-		
-		<section class="zone"><center><small>!! this page is just a mockup! this is not real data!!!</small></center></section>
-		
+
+		<section class="zone">
+			<center><small>!! this page is just a mockup! this is NOT real data!!!</small></center>
+		</section>
+
 		<section class="zone examples top_stuff">
 			<div class="panel">
 				<div class="cover_swatches" target="_blank">
@@ -68,11 +73,11 @@
 							<span class="k square">&nbsp;</span>
 							<span class="w square">&nbsp;</span>
 							<span class="k square">&nbsp;</span>
+						</div>
 					</div>
 				</div>
-			</div>
 		</section>
-		
+
 		<section class="zone nomargin">
 			<h1><b><b>tone</b> artist dashboard:</b> sqip</h1>
 			<p>some text here.</p>
@@ -98,7 +103,7 @@
 				</tbody>
 			</table>
 		</section>
-		
+
 		<section class="zone">
 			<h2><b>artist stats:</b></h2>
 			<p>some text here.</p>
@@ -126,7 +131,7 @@
 				</tbody>
 			</table>
 		</section>
-		
+
 		<section class="zone">
 			<h2><b>song stats:</b></h2>
 			<p>some text here.</p>
@@ -176,24 +181,24 @@
 				</tbody>
 			</table>
 		</section>
-		
+
 		<br />
 		<br />
-		
+
 		<!-- <footer>
 			&nbsp;
 		</footer> -->
-		
+
 		<div class="bottom_squares" aria-hidden="true" role="presentation" tabindex="-1">
 			<a class="lb square button sone" href="index.html">
 				<h1>
 					<span class="sone_wrap">
-						<span class="rt">s</span> 
-						<span class="bt">o</span> 
+						<span class="rt">s</span>
+						<span class="bt">o</span>
 					</span>
 					<span class="sone_wrap">
-						<span class="yt">n</span> 
-						<span class="kt">e</span> 
+						<span class="yt">n</span>
+						<span class="kt">e</span>
 					</span>
 				</h1>
 			</a>
@@ -210,71 +215,72 @@
 	<script type="text/javascript" src="sone.js"></script>
 	<script type="text/javascript">
 		// need to port this over to https://github.com/Vibrant-Colors/node-vibrant
-		(function() {
-		  document.addEventListener('DOMContentLoaded', function() {
-			var example, examples, i, img, len, results;
-			examples = document.querySelectorAll('.cover_swatches > div');
-			results = [];
-			for (i = 0, len = examples.length; i < len; i++) {
-			  example = examples[i];
-			  img = example.querySelector('img');
-			  img.crossOrigin = '';
-			  img.setAttribute('src', img.getAttribute('data-src'));
-			  results.push(img.addEventListener('load', function(e) {
-				var color, colorHolder, colorName, colors, j, len1, panel, profile, profileName, profiles, results1, vibrant;
-				vibrant = new Vibrant(this);
-				panel = e.target.parentElement;
-				while (!panel.classList.contains('panel')) {
-					panel = panel.parentElement;
+		(function () {
+			document.addEventListener('DOMContentLoaded', function () {
+				var example, examples, i, img, len, results;
+				examples = document.querySelectorAll('.cover_swatches > div');
+				results = [];
+				for (i = 0, len = examples.length; i < len; i++) {
+					example = examples[i];
+					img = example.querySelector('img');
+					img.crossOrigin = '';
+					img.setAttribute('src', img.getAttribute('data-src'));
+					results.push(img.addEventListener('load', function (e) {
+						var color, colorHolder, colorName, colors, j, len1, panel, profile, profileName, profiles, results1, vibrant;
+						vibrant = new Vibrant(this);
+						panel = e.target.parentElement;
+						while (!panel.classList.contains('panel')) {
+							panel = panel.parentElement;
+						}
+
+						if (vibrant.VibrantSwatch == undefined) {
+							var vibrant_rgb = '255, 255, 255';
+						} else {
+							var vibrant_rgb = vibrant.VibrantSwatch.getRgb();
+						}
+
+						var radial_css = 'radial-gradient(circle, rgba(' + vibrant_rgb + ', 1) 0%, rgba(' + vibrant_rgb + ',0) 50%)';
+
+						panel.style.backgroundImage = radial_css;
+						// panel.style.backgroundColor = vibrant.VibrantSwatch.getHex();
+						// panel.style.color = vibrant.VibrantSwatch.getTitleTextColor();
+						colors = document.createElement('div');
+						colors.classList.add('colors', 'grid');
+						panel.querySelector('.panel-body').appendChild(colors);
+						profiles = ['VibrantSwatch', 'MutedSwatch', 'DarkVibrantSwatch', 'DarkMutedSwatch', 'LightVibrantSwatch', 'LightMutedSwatch'];
+						results1 = [];
+						for (j = 0, len1 = profiles.length; j < len1; j++) {
+							profileName = profiles[j];
+							profile = vibrant[profileName];
+							if (!profile) {
+								// continue;
+
+								color = document.createElement('div');
+								color.classList.add('color');
+								color.style.backgroundColor = 'transparent';
+								colors.appendChild(color);
+								results1.push(colors.appendChild(color));
+							} else {
+								// colorHolder = document.createElement('div');
+								color = document.createElement('div');
+								color.classList.add('color');
+								// color.classList.add('shadow-z-1');
+								color.style.backgroundColor = profile.getHex();
+								// colorName = document.createElement('span');
+								// colorName.innerHTML = profileName.substring(0, profileName.length - 6);
+								colors.appendChild(color);
+								// colors.appendChild(colorName);
+								results1.push(colors.appendChild(color));
+							}
+						}
+						return results1;
+					}));
 				}
-				
-				if(vibrant.VibrantSwatch == undefined){
-					var vibrant_rgb = '255, 255, 255';
-				} else {
-					var vibrant_rgb = vibrant.VibrantSwatch.getRgb();
-				}
-				
-				var radial_css = 'radial-gradient(circle, rgba(' + vibrant_rgb + ', 1) 0%, rgba(' + vibrant_rgb + ',0) 50%)';
-				
-				panel.style.backgroundImage = radial_css;
-				// panel.style.backgroundColor = vibrant.VibrantSwatch.getHex();
-				// panel.style.color = vibrant.VibrantSwatch.getTitleTextColor();
-				colors = document.createElement('div');
-				colors.classList.add('colors','grid');
-				panel.querySelector('.panel-body').appendChild(colors);
-				profiles = ['VibrantSwatch', 'MutedSwatch', 'DarkVibrantSwatch', 'DarkMutedSwatch', 'LightVibrantSwatch', 'LightMutedSwatch'];
-				results1 = [];
-				for (j = 0, len1 = profiles.length; j < len1; j++) {
-				  profileName = profiles[j];
-				  profile = vibrant[profileName];
-				  if (!profile) {
-					// continue;
-					
-					color = document.createElement('div');
-					color.classList.add('color');
-					color.style.backgroundColor = 'transparent';
-					colors.appendChild(color);
-					results1.push(colors.appendChild(color));
-				  } else {
-					  // colorHolder = document.createElement('div');
-					  color = document.createElement('div');
-					  color.classList.add('color');
-					  // color.classList.add('shadow-z-1');
-					  color.style.backgroundColor = profile.getHex();
-					  // colorName = document.createElement('span');
-					  // colorName.innerHTML = profileName.substring(0, profileName.length - 6);
-					  colors.appendChild(color);
-					  // colors.appendChild(colorName);
-					  results1.push(colors.appendChild(color));
-				  }
-				}
-				return results1;
-			  }));
-			}
-			return results;
-		  });
-		
+				return results;
+			});
+
 		}).call(this);
 	</script>
 </body>
+
 </html>
